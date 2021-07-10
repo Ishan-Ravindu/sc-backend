@@ -31,7 +31,6 @@ exports.getStockDetails = (req, res, next) => {
 
 exports.deleteStock = (req, res, next) => {
   // console.log(req);
-  // console.log(req);
   // return;
   Stock.deleteOne({ _id: req.query.id })
     .then((result) => {
@@ -50,7 +49,7 @@ exports.deleteStock = (req, res, next) => {
 };
 
 exports.updateStock = (req, res, next) => {
-  console.log(req);
+  // console.log(req);
   const stock = {
     item: req.body.item,
     current_level: req.body.current_level,
