@@ -1,18 +1,17 @@
 const Supplier = require("../modules/supplier");
 
-exports.createSupplier = (req, res, next) => {
+exports.createSupplier = async (req, res, next) => {
   // console.log(req.body.first);
   // console.log(req.body.last);
 
   const post = new Supplier({
-    first_name: req.body.first,
-    last_name: req.body.last,
-    mobile_number: req.body.mobile,
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    mobile_number: req.body.mobile_number,
     email: req.body.email,
   });
-  post.save().then(() => {
-    console.log("success");
-  });
+  const result = await post.save();
+  res.status(200).json(result);
 };
 exports.getSupplierDetails = (req, res, next) => {
   Supplier.find()
@@ -33,7 +32,7 @@ exports.getSupplierDetails = (req, res, next) => {
 exports.deleteSupplier = (req, res, next) => {
   // console.log(req.params.id);
   // return;
-  Supplier.deleteOne({ _id: req.params.id })
+  Supplier.deleteOne({ _id: req.query.id })
     .then((result) => {
       // console.log(result);
       if (result.n > 0) {
@@ -50,12 +49,13 @@ exports.deleteSupplier = (req, res, next) => {
 };
 
 exports.updateSupplier = (req, res, next) => {
-  const Supplier = new Supplier({
-    first_name: req.body.first,
-    last_name: req.body.last,
-    mobile_number: req.body.mobile,
-  });
-  Supplier.updateOne({ _id: req.params.id }, Supplier)
+  const supplier = {
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    mobile_number: req.body.mobile_number,
+    email: req.body.email,
+  };
+  Supplier.updateOne({ _id: req.body._id }, supplier)
     .then((result) => {
       // console.log(result);
       if (result.n > 0) {
