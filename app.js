@@ -23,6 +23,8 @@ const getStockDetails = require("./routes/stock");
 const deleteStock = require("./routes/stock");
 const updateStock = require("./routes/stock");
 
+const senderSmsRoutes = require("./routes/senderSms");
+
 const app = express();
 
 mongoose
@@ -76,5 +78,7 @@ app.use("/api/stock", createStock);
 app.use("/api/stock", getStockDetails);
 app.use("/api/stock", deleteStock);
 app.use("/api/stock", updateStock);
+
+app.use("/api/sms", senderSmsRoutes);
 
 module.exports = app;
