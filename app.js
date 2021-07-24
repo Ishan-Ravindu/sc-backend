@@ -27,6 +27,8 @@ const senderSmsRoutes = require("./routes/senderSms");
 
 const billRoutes = require("./routes/bill");
 
+const userRoutes = require("./routes/user");
+
 const app = express();
 
 mongoose
@@ -84,5 +86,7 @@ app.use("/api/stock", updateStock);
 app.use("/api/bill", billRoutes);
 
 app.use("/api/sms", senderSmsRoutes);
+
+app.use("/api/user", userRoutes);
 
 module.exports = app;
