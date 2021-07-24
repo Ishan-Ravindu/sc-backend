@@ -25,6 +25,8 @@ const updateStock = require("./routes/stock");
 
 const senderSmsRoutes = require("./routes/senderSms");
 
+const billRoutes = require("./routes/bill");
+
 const app = express();
 
 mongoose
@@ -78,6 +80,8 @@ app.use("/api/stock", createStock);
 app.use("/api/stock", getStockDetails);
 app.use("/api/stock", deleteStock);
 app.use("/api/stock", updateStock);
+
+app.use("/api/bill", billRoutes);
 
 app.use("/api/sms", senderSmsRoutes);
 
