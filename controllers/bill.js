@@ -93,3 +93,30 @@ exports.getBillItemName = (req, res, next) => {
       });
     });
 };
+
+exports.getBillTotall = (req, res, next) => {
+  console.log(req.query.Date);
+  Bill.find({})
+    .then((Bill) => {
+      if (Bill) {
+        // console.log("bill", Bill);
+        let total = 0;
+        let filtered = Bill.filter((b) => {
+          // console.log("postData", new Date(b.postDate).toLocaleDateString());
+          if (new Date(b.postDate).toLocaleDateString() == req.query.Date) {
+            total = parseInt(total) + parseInt(b.bilTotal);
+            return true;
+          }
+        });
+        res.status(200).json(total);
+        console.log(total);
+      } else {
+        res.status(404).json({ message: "Bill not Found!" });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: "Fetching Bill failed!",
+      });
+    });
+};
